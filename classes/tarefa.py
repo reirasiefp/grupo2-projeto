@@ -2,6 +2,8 @@ from datetime import date, datetime
 
 class Tarefa:
 
+    _id_counter = 0
+
     def __init__(self, nome, prioridade, tipo, data_fim):
         self.nome = nome
         self.prioridade = prioridade
@@ -11,6 +13,7 @@ class Tarefa:
         self.status = 0
         self.data_inicio = date.today()
         self.data_fim = datetime.strptime(data_fim, "%Y-%m-%d").date()
+    
 
     def setPrioridade(self, nova_prioridade):
         if 1 <= nova_prioridade <= 10:
