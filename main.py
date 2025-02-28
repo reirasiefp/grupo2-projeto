@@ -1,22 +1,25 @@
-from classes.membro import Membro
-from classes.projeto import Projeto
-from classes.tarefa import Tarefa
+from classes.gestores.gestor_tar_mem import Gestor_Tar_Mem
+from classes.relações.tarefa_membro import Tarefa_Membro
 
 #menus
 
-tarefa = Tarefa("nome da tarefa", 1, "tipo", "2025-05-01")
-print(tarefa)
+gestorTarMem = Gestor_Tar_Mem("ficheiros/tarefa_membro.svc")
+
+gestorTarMem.guardar_registro(Tarefa_Membro(1,"email1@gmail.com"))
+gestorTarMem.guardar_registro(Tarefa_Membro(1,"email2@gmail.com"))
+gestorTarMem.guardar_registro(Tarefa_Membro(2,"email1@gmail.com"))
+gestorTarMem.guardar_registro(Tarefa_Membro(2,"email2@gmail.com"))
+
+
+
+# Buscando registros por id
+registros_por_id = gestorTarMem.procurar_por_id(2)
+for r in registros_por_id:
+    print(f"ID: {r.id_tarefa}, Email: {r.email_membro}")
+
 print("#"*30)
 
-
-membro = Membro("nome1", "email1", "funcao1")
-tarefa.adicionar_membro(membro)
-membro = Membro("nome1", "email1", "funcao1")
-tarefa.adicionar_membro(membro)
-
-membro2 = Membro("nome2", "email2", "funcao2")
-tarefa.adicionar_membro(membro2)
-
-tarefa.verListaMembros()
-
-projeto = Projeto("nome")
+# Buscando registros por email
+registros_por_email = gestorTarMem.procurar_por_email("email1@gmail.com")
+for r in registros_por_email:
+    print(f"ID: {r.id_tarefa}, Email: {r.email_membro}")
