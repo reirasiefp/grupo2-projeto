@@ -40,6 +40,25 @@ class Gestor_Tarefas:
                     print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: Concluido, Id Projeto: {id_projeto}")
 
 
+    def prioridade_tarefas (self, prioridade_desejada):
+        with open(self.ficheiro, "r") as f:
+            linhas = f.readlines()
+
+        print(f"\nTarefas com Prioridade {prioridade_desejada}:")
+        encontrou_verificar = False
+
+        for linha in linhas:
+            id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_projeto = linha.strip().split(",") 
+            if prioridade == prioridade_desejada: 
+                encontrou_verificar = True
+                print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, "
+                  f"Data Inicio: {data_inicio}, Data Fim: {data_fim}, "
+                  f"Status: {'Em progresso' if estado == '0' else 'Concluído'}, Projeto: {id_projeto}")
+            
+        if not encontrou_verificar:
+            print ('Não existe nenhuma tarefa com essa prioridade.')
+
+
     def listar_tarefas_projeto(self, id_projeto):
         with open(self.ficheiro, "r") as f:
             linhas = f.readlines()
