@@ -41,4 +41,4 @@ class Gestor_Tar_Mem:
         for linhas in linhas:
             id_tarefa, email = linhas.strip().split(",")
             if email == mail:
-                print(gestorTarefas.get_tarefa_by_id(email))
+                print(gestorTarefas.get_tarefa_by_id(id_tarefa))

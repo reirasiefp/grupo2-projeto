@@ -50,12 +50,43 @@ def submenuProjetos():
         if escolha == "1":
             listagemProjetos(gestorProjetos)
         elif escolha == "2":
-            print("Você escolheu a Opção B!")
+            novo_projeto = funcoes_main.adicionar_projeto(gestorProjetos)
+            ##gestao
         elif escolha == "0":
             print("Voltando ao Menu Principal...")
             break
         else:
             print("Opção inválida, tente novamente.")
+
+def gestaoMembro(gestorMembros, novoMembro=None):
+    gestorTarMem = Gestor_Tar_Mem("ficheiros/tarefa_membro.csv")
+
+    email = None
+    membro = None
+    if novoMembro is not None:
+        email = novoMembro.email
+        membro = novoMembro
+    else:
+        email = input("Insira o email: ")
+        membro = gestorMembros.get_membro_by_email(email)
+        if membro is None:
+            print("Membro não encontrada")
+            return
+        
+    print(f"\n============= Membro: {membro.email} =============")
+    print("1 - Ver todas os tarefas")
+    print("0 - Voltar")
+
+    escolha = input("Escolha uma opção: ")
+
+    if escolha == "1":
+        gestorTarMem.ver_todas_tarefas_by_email(membro.email)
+    elif escolha == "0":
+        print("Voltar ao menu Tarefas...")
+        return
+    else:
+        print("Opção inválida, tente novamente.")
+
 
 def submenuMembros():
     gestorMembros = Gestor_Membros("ficheiros/membros.csv")
@@ -71,9 +102,11 @@ def submenuMembros():
         if escolha == "1":
             gestorMembros.ver_todos_membros()
         elif escolha == "2":
-            print("Você escolheu a Opção B!")
+            novo_membro = funcoes_main.adicionar_membros(gestorMembros)
+            if(novo_membro is not None):
+                gestaoMembro(gestorMembros, novo_membro)
         elif escolha == "3":
-            print("Você escolheu a Opção C!")
+            gestaoMembro(gestorMembros)
         elif escolha == "0":
             print("Voltando ao Menu Principal...")
             break
@@ -108,6 +141,48 @@ def listagemTarefas(gestorTarefas):
         else:
             print("Opção inválida, tente novamente.")
 
+
+def editarTarefa(gestorTarefas, tarefa):
+    print(f"\n============= Tarefa: {tarefa.id} =============")
+    print("1 - Editar Nome")
+    print("2 - Editar Prioridade")
+    print("3 - Editar data de fim")
+    print("4 - Concluir tarefa")
+    print("0 - Voltar")
+
+    escolha = input("Escolha uma opção: ")
+    if escolha == "1":
+        novo_nome = input("Novo nome: ")
+        gestorTarefas.editarTarefa(tarefa.id, novo_nome, None, None)
+    elif escolha == "2":
+        while True:
+            try:
+                nova_prioridade = int(input("Prioridade (1-9): "))
+                if funcoes_main.validar_prioridade(nova_prioridade):
+                    break
+                else:
+                    print("Valor para a prioridade incorrecto!")
+            except ValueError:
+                print("Entrada inválida! Por favor, insira um número inteiro. (1-9)!")
+        gestorTarefas.editarTarefa(tarefa.id, None, nova_prioridade, None)
+    elif escolha == "3":
+        while True:
+            nova_data_fim = input("Data de fim (formato YYYY-MM-DD): ")
+            if funcoes_main.validar_data(nova_data_fim):
+                break
+            else:
+                print("Formato de data inválido")
+        gestorTarefas.editarTarefa(tarefa.id, None, None, nova_data_fim)
+    elif escolha == "4":
+        gestorTarefas.concluir_tarefa(tarefa.id)
+    elif escolha == "0":
+        print("Voltar ao menu Tarefas...")
+        return
+    else:
+        print("Opção inválida, tente novamente.")
+
+
+
 def gestaoTarefa(gestorTarefas, novaTarefa=None):
     gestorTarMem = Gestor_Tar_Mem("ficheiros/tarefa_membro.csv")
 
@@ -134,7 +209,7 @@ def gestaoTarefa(gestorTarefas, novaTarefa=None):
     if escolha == "1":
         funcoes_main.associar_tarefa_membro(gestorTarMem, tarefa.id)
     elif escolha == "2":
-        print()
+        editarTarefa(gestorTarefas, tarefa)
     elif escolha == "3":
         gestorTarMem.ver_todos_membros_by_tarefaId(tarefa.id)
     elif escolha == "0":
@@ -142,7 +217,6 @@ def gestaoTarefa(gestorTarefas, novaTarefa=None):
         return
     else:
         print("Opção inválida, tente novamente.")
-
 
 def submenuTarefas():
     gestorTarefas = Gestor_Tarefas("ficheiros/tarefas.csv")
