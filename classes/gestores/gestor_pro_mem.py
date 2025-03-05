@@ -20,6 +20,7 @@ class Gestor_Pro_Mem:
          with open(self.ficheiro, "w") as f:
             for registro in self.registros:
                 f.write(registro.to_string() + "\n")
+            print("Membro associado a projecto com sucesso!")
     
     def procurar_por_id(self, id):
         # Buscar todos os registros com o mesmo id de projeto

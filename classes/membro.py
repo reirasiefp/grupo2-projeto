@@ -12,3 +12,12 @@ class Membro:
     
     def alterar_funcao(self, nova_funcao):
         self.funcao = nova_funcao
+
+    def to_string(self):
+        return f"{self.nome};{self.email};{self.funcao}"
+    
+    def from_string(membro_string):
+        nome, email, funcao = membro_string.strip().split(";")
+        return Membro(nome, email, funcao)
+
+    
