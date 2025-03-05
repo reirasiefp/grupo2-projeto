@@ -18,7 +18,6 @@ def listagemProjetos(gestorProjetos):
             print("="*30)
             print("Lista de todos os projetos:")
             gestorProjetos.ver_todos_projetos()
-            
         elif escolha == "2":
             print("="*30)
             print("Lista dos projetos em progresso:")
@@ -73,6 +72,8 @@ def submenuMembros():
             gestorMembros.ver_todos_membros()
         elif escolha == "2":
             print("Você escolheu a Opção B!")
+        elif escolha == "3":
+            print("Você escolheu a Opção C!")
         elif escolha == "0":
             print("Voltando ao Menu Principal...")
             break
