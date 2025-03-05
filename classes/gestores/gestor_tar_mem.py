@@ -1,12 +1,11 @@
+from classes.gestores.gestor_membros import Gestor_Membros
 from classes.relações.tarefa_membro import Tarefa_Membro
 
 class Gestor_Tar_Mem:
     def __init__(self, ficheiro):
         self.ficheiro = ficheiro
-        self.registros = self.carregar_ficheiro()
 
     def guardar_registro(self, registro):
-        self.registros.append(registro)
         self._guardar_no_ficheiro()
         
     def carregar_ficheiro(self):
@@ -20,6 +19,18 @@ class Gestor_Tar_Mem:
          with open(self.ficheiro, "w") as f:
             for registro in self.registros:
                 f.write(registro.to_string() + "\n")
+
+    def ver_todos_membros_by_tarefaId(self,tarefa_id):
+        gestorMembros = Gestor_Membros("ficheiros/membros.csv")
+        with open(self.ficheiro, "r") as f:
+            linhas = f.readlines()
+        
+        for linhas in linhas:
+            id_tarefa, email = linhas.strip().split(",")
+            if id_tarefa == tarefa_id:
+                print(gestorMembros.get_membro_by_email(email))
+
+
     
     def procurar_por_id(self, id):
         # Buscar todos os registros com o mesmo id

@@ -50,7 +50,7 @@ class Gestor_Tarefas:
                 print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: {'Em progresso' if estado == '0' else 'Concluido'}")
  
 
-    def alterar_estado_tarefa(self, id_tarefa):
+    def concluir_tarefa(self, id_tarefa):
         tarefas = []
         tarefa_encontrada = False
         
@@ -58,10 +58,7 @@ class Gestor_Tarefas:
             leitor_csv = csv.reader(f)
             for linha in leitor_csv:
                 if int(linha[0]) == id_tarefa:
-                    if linha[6] == '0':
-                        linha[6] = '1'
-                    else:
-                        linha[6] = '0'
+                    linha[6] = '1'
                     tarefa_encontrada = True
                 tarefas.append(linha)
         
