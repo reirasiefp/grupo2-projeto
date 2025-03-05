@@ -14,10 +14,10 @@ class Membro:
         self.funcao = nova_funcao
 
     def to_string(self):
-        return f"{self.nome};{self.email};{self.funcao}"
+        return f"{self.nome},{self.email},{self.funcao}"
     
     def from_string(membro_string):
-        nome, email, funcao = membro_string.strip().split(";")
+        nome, email, funcao = membro_string.strip().split(",")
         return Membro(nome, email, funcao)
 
     

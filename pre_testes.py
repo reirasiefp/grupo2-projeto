@@ -1,10 +1,10 @@
 import os
 
-#Apaga todo o conteudo dos ficheiros .svc dentro da pasta "ficheiros"
+#Apaga todo o conteudo dos ficheiros .csv dentro da pasta "ficheiros"
 
 for root, _, files in os.walk("ficheiros"):
     for file in files:
-         if file.endswith(".svc"):
+         if file.endswith(".csv"):
             file_path = os.path.join(root, file)
             try:
                 with open(file_path, 'w') as f:

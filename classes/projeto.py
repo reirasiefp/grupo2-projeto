@@ -56,9 +56,9 @@ class Projeto:
             print("Projeto concluido")
     
     def to_string(self):
-        return f"{self.id};{self.nome};{self.data_inicio};{self.status}"
+        return f"{self.id},{self.nome},{self.data_inicio},{self.status}"
     
     def from_string(projeto_string):
-        id, nome, data_inicio, status = projeto_string.strip().split(";")
+        id, nome, data_inicio, status = projeto_string.strip().split(",")
         return Projeto(nome, None, id, data_inicio, status)
 

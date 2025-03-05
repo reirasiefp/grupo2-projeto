@@ -1,3 +1,5 @@
+import csv
+
 class Gestor_Tarefas:
     def __init__(self, ficheiro):
         self.ficheiro = ficheiro
@@ -9,7 +11,7 @@ class Gestor_Tarefas:
         if not linhas:
             return 1
         
-        ids = [int(linha.split(";")[0]) for linha in linhas if linha.strip()]
+        ids = [int(linha.split(",")[0]) for linha in linhas if linha.strip()]
         return max(ids) + 1 if ids else 1
     
     def guardar_ficheiro(self, tarefa):
@@ -25,13 +27,48 @@ class Gestor_Tarefas:
             linhas = f.readlines()
         
         for linhas in linhas:
-            id, nome, data_inicio, estado = linhas.strip().split(";")
+            id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_projeto = linhas.strip().split(",")
             if opcao == 0:
-                print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: {'Em progresso' if estado == '0' else 'Concluido'}")
+                print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: {'Em progresso' if estado == '0' else 'Concluido'}, Id Projeto: {id_projeto}")
             elif opcao == 1:
                 if estado == '0':
-                    print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: Em progresso")
+                    print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: Em progresso, Id Projeto: {id_projeto}")
             else:
                 if estado == '1':
-                    print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: Concluido")
-            
+                    print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: Concluido, Id Projeto: {id_projeto}")
+
+
+    def listar_tarefas_projeto(self, id_projeto):
+        with open(self.ficheiro, "r") as f:
+            linhas = f.readlines()
+        
+        for linhas in linhas:
+            id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_proj = linhas.strip().split(",")
+            if str(id_projeto) == id_proj:
+                print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: {'Em progresso' if estado == '0' else 'Concluido'}")
+ 
+
+    def alterar_estado_tarefa(self, id_tarefa):
+        tarefas = []
+        tarefa_encontrada = False
+        
+        with open(self.ficheiro, "r") as f:
+            leitor_csv = csv.reader(f)
+            for linha in leitor_csv:
+                if int(linha[0]) == id_tarefa:
+                    if linha[6] == '0':
+                        linha[6] = '1'
+                    else:
+                        linha[6] = '0'
+                    tarefa_encontrada = True
+                tarefas.append(linha)
+        
+        if not tarefa_encontrada:
+            print(f"Tarefa com ID {id_tarefa} não encontrada.")
+            return
+        
+        with open(self.ficheiro, "w", newline='') as f:
+            escrita_csv = csv.writer(f)
+            escrita_csv.writerows(tarefas)
+        
+        print("Estado da tarefa foi atualizado!")

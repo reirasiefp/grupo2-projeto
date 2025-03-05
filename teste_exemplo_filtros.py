@@ -3,7 +3,7 @@ from classes.gestores.gestor_projetos import Gestor_Projetos
 from classes.projeto import Projeto
 
 
-gestorProjetos = Gestor_Projetos("../ficheiros/projetos.svc")
+gestorProjetos = Gestor_Projetos("ficheiros/projetos.csv")
 
 projeto1 = Projeto("Projeto1 - Teste do mal",gestorProjetos)
 #gestorProjetos.guardar_ficheiro(projeto1)

@@ -5,7 +5,7 @@ class Gestor_Membros:
     def email_exists(self, email):
         with open(self.ficheiro, "r") as f:
             for line in f:
-                _, existing_email, _ = line.strip().split(";")
+                _, existing_email, _ = line.strip().split(",")
                 if existing_email == email:
                     return True
         return False
