@@ -71,10 +71,10 @@ class Tarefa:
             return "Concluída"
 
     def to_string(self):
-        return f"{self.id};{self.nome};{self.prioridade};{self.tipo};{self.data_inicio};{self.data_fim};{self.status};{self.id_projeto}"
+        return f"{self.id},{self.nome},{self.prioridade},{self.tipo},{self.data_inicio},{self.data_fim},{self.status},{self.id_projeto}"
     
     def from_string(tarefa_string):
-        id, nome, prioridade, tipo, data_inicio, data_fim, status, id_projeto = tarefa_string.strip().split(";")
+        id, nome, prioridade, tipo, data_inicio, data_fim, status, id_projeto = tarefa_string.strip().split(",")
         return Tarefa(nome, prioridade, tipo, data_fim, id_projeto, None, id, data_inicio, status)
 
     def __str__(self):

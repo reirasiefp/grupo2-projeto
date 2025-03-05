@@ -10,23 +10,23 @@ from classes.relações.tarefa_membro import Tarefa_Membro
 from classes.tarefa import Tarefa
 #APAGAR TODOS OS REGISTOS NOS FICHEIROS ANTES DE CORRER OS TESTES
 
-#Criar 1 Projetos (confirmar no projetos.svc)
-gestor_projetos = Gestor_Projetos("ficheiros/projetos.svc")
+#Criar 1 Projetos (confirmar no projetos.csv)
+gestor_projetos = Gestor_Projetos("ficheiros/projetos.csv")
 
 projeto = Projeto("Projeto Principal", gestor_projetos)
 gestor_projetos.guardar_ficheiro(projeto)
 
-#Criar 2 Membros (confirmar no membros.svc)
-gestor_membros = Gestor_Membros("ficheiros/membros.svc")
+#Criar 2 Membros (confirmar no membros.csv)
+gestor_membros = Gestor_Membros("ficheiros/membros.csv")
 
-membro1 = Membro("Antonio Silva","antonio1@exemplo.com","Developer")
-membro2 = Membro("Marta Oliveira","marta1@exemplo.com","Designer")
+membro1 = Membro("Antonio Silva","antonio@exemplo.com","Developer")
+membro2 = Membro("Marta Oliveira","marta@exemplo.com","Designer")
 
 gestor_membros.add_member(membro1)
 gestor_membros.add_member(membro2)
 
 #Criar 4 Tarefas (tarefas.svc)
-gestor_tarefas = Gestor_Tarefas("ficheiros/tarefas.svc")
+gestor_tarefas = Gestor_Tarefas("ficheiros/tarefas.csv")
 
 tarefa1 = Tarefa("Tarefa Dev",1,"Desenvolvimento","2025-04-04", projeto.id, gestor_tarefas)
 gestor_tarefas.guardar_ficheiro(tarefa1)
@@ -41,8 +41,8 @@ tarefa4 = Tarefa("Tarefa Dev 2",1,"Desenvolvimento","2025-04-25", projeto.id, ge
 gestor_tarefas.guardar_ficheiro(tarefa4)
 
 
-#Associar Membros aos Projetos (confirmar no projeto_membro.svc)
-gestorProMem = Gestor_Pro_Mem("ficheiros/projeto_membro.svc")
+#Associar Membros aos Projetos (confirmar no projeto_membro.csv)
+gestorProMem = Gestor_Pro_Mem("ficheiros/projeto_membro.csv")
 
 projeto_membro1 = Projeto_Membro(projeto.id,membro1.email)
 projeto_membro2 = Projeto_Membro(projeto.id,membro2.email)
@@ -50,8 +50,8 @@ projeto_membro2 = Projeto_Membro(projeto.id,membro2.email)
 gestorProMem.guardar_registro(projeto_membro1)
 gestorProMem.guardar_registro(projeto_membro2)
 
-#Associar Membros às Tarefas (confirmar no tarefa_membro.svc)
-gestorTarMem = Gestor_Tar_Mem("ficheiros/tarefa_membro.svc")
+#Associar Membros às Tarefas (confirmar no tarefa_membro.csv)
+gestorTarMem = Gestor_Tar_Mem("ficheiros/tarefa_membro.csv")
 
 tarefa1_membro1 = Tarefa_Membro(tarefa1.id,membro1.email)
 gestorTarMem.guardar_registro(tarefa1_membro1)

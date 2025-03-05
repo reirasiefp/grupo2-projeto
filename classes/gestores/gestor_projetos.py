@@ -9,7 +9,7 @@ class Gestor_Projetos:
         if not linhas:
             return 1
         
-        ids = [int(linha.split(";")[0]) for linha in linhas if linha.strip()]
+        ids = [int(linha.split(",")[0]) for linha in linhas if linha.strip()]
         return max(ids) + 1 if ids else 1
     
     def guardar_ficheiro(self, projeto):
@@ -25,7 +25,7 @@ class Gestor_Projetos:
             linhas = f.readlines()
         
         for linhas in linhas:
-            id, nome, data_inicio, estado = linhas.strip().split(";")
+            id, nome, data_inicio, estado = linhas.strip().split(",")
             if opcao == 0:
                 print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: {'Em progresso' if estado == '0' else 'Concluido'}")
             elif opcao == 1:

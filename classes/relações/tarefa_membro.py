@@ -4,8 +4,8 @@ class Tarefa_Membro:
         self.email_membro = email_membro
 
     def to_string(self):
-        return f"{self.id_tarefa};{self.email_membro}"
+        return f"{self.id_tarefa},{self.email_membro}"
 
     def from_string(string):
-        id, email = string.strip().split(";")
+        id, email = string.strip().split(",")
         return Tarefa_Membro(int(id),email)
