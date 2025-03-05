@@ -5,8 +5,10 @@ from classes.relações.tarefa_membro import Tarefa_Membro
 class Gestor_Tar_Mem:
     def __init__(self, ficheiro):
         self.ficheiro = ficheiro
+        self.registros = self.carregar_ficheiro()
 
     def guardar_registro(self, registro):
+        self.registros.append(registro)
         self._guardar_no_ficheiro()
         
     def carregar_ficheiro(self):
@@ -39,4 +41,4 @@ class Gestor_Tar_Mem:
         for linhas in linhas:
             id_tarefa, email = linhas.strip().split(",")
             if email == mail:
-                print(gestorTarefas.get_tarefa_by_id(id_tarefa))
+                print(gestorTarefas.get_tarefa_by_id(email))
