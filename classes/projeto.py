@@ -5,7 +5,7 @@ from classes.gestores.gestor_projetos import Gestor_Projetos
 
 class Projeto:
 
-    def __init__(self, nome, gestor, id = None,data_inico = None, status = None):
+    def __init__(self, nome, gestor, id = None,data_inicio = None, status = None):
 
         if id is not None:
             self.id = id
@@ -16,8 +16,8 @@ class Projeto:
         self.lista_membros = []
         self.lista_tarefas = []
 
-        if data_inico is not None:
-            self.data_inicio = data_inico
+        if data_inicio is not None:
+            self.data_inicio = data_inicio
         else:
             self.data_inicio = date.today()
 
@@ -60,5 +60,5 @@ class Projeto:
     
     def from_string(projeto_string):
         id, nome, data_inicio, status = projeto_string.strip().split(";")
-        return Projeto(nome, id, data_inicio, status)
+        return Projeto(nome, None, id, data_inicio, status)
 

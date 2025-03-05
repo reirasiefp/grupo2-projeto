@@ -2,16 +2,28 @@ from datetime import date, datetime
 
 class Tarefa:
 
-    _id_counter = 0
-
-    def __init__(self, nome, prioridade, tipo, data_fim):
+    def __init__(self, nome, prioridade, tipo, data_fim, gestor, id = None, data_inicio = None, status = None):
+        
+        if id is not None:
+            self.id = id
+        else:
+            self.id = gestor.gerar_novo_id()
+        
         self.nome = nome
         self.prioridade = prioridade
         self.membros = []
         self.tipo = tipo
         #0 = em progresso // 1 = concluido
-        self.status = 0
-        self.data_inicio = date.today()
+        if status is not None:
+            self.status = status
+        else:
+            self.status = 0
+        
+        if data_inicio is not None:
+            self.data_inicio = data_inicio
+        else:
+            self.data_inicio = date.today()
+
         self.data_fim = datetime.strptime(data_fim, "%Y-%m-%d").date()
     
 
@@ -55,6 +67,13 @@ class Tarefa:
             return "Em progresso"
         else:
             return "Concluída"
-        
+
+    def to_string(self):
+        return f"{self.id};{self.nome};{self.prioridade};{self.tipo};{self.data_inicio};{self.data_fim};{self.status}"
+    
+    def from_string(tarefa_string):
+        id, nome, prioridade, tipo, data_inicio, data_fim, status = tarefa_string.strip().split(";")
+        return Tarefa(nome, prioridade, tipo, data_fim, None, id, data_inicio, status)
+
     def __str__(self):
-        return f"Nome: {self.nome}\nPrioridade: {self.prioridade} // Estado: {self.verificarStatus()}\nData Inicio: {self.data_inicio} // Data Fim: {self.data_fim}"
+        return f"Id: {self.id} Nome: {self.nome}\nPrioridade: {self.prioridade} // Estado: {self.verificarStatus()}\nData Inicio: {self.data_inicio} // Data Fim: {self.data_fim}"
