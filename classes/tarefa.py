@@ -63,12 +63,6 @@ class Tarefa:
         print("Lista de membros:") 
         for membro in self.membros:
             print(f"Nome: {membro.nome}, Email: {membro.email}")
-    
-    def verificarStatus(self):
-        if self.status == 0:
-            return "Em progresso"
-        else:
-            return "Concluída"
 
     def to_string(self):
         return f"{self.id},{self.nome},{self.prioridade},{self.tipo},{self.data_inicio},{self.data_fim},{self.status},{self.id_projeto}"
@@ -78,4 +72,4 @@ class Tarefa:
         return Tarefa(nome, prioridade, tipo, data_fim, id_projeto, None, id, data_inicio, status)
 
     def __str__(self):
-        return f"Id: {self.id} Nome: {self.nome}\nPrioridade: {self.prioridade} // Estado: {self.verificarStatus()}\nData Inicio: {self.data_inicio} // Data Fim: {self.data_fim}"
+        return f"Id: {self.id} Nome: {self.nome}\nPrioridade: {self.prioridade}\nData Inicio: {self.data_inicio} // Data Fim: {self.data_fim}"

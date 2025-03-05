@@ -3,7 +3,7 @@ from datetime import date
 
 class Projeto:
 
-    def __init__(self, nome, gestor="Gestor_Projetos", id = None,data_inicio = None, status = None):
+    def __init__(self, nome, gestor, id = None,data_inicio = None, status = None):
 
         if id is not None:
             self.id = id

@@ -1,6 +1,9 @@
 import re
 
 from classes.gestores.gestor_membros import Gestor_Membros
+from classes.membro import Membro
+from classes.projeto import Projeto
+from classes.relações.projeto_membro import Projeto_Membro
 from classes.relações.tarefa_membro import Tarefa_Membro
 from classes.tarefa import Tarefa
 
@@ -39,6 +42,46 @@ def adicionar_tarefa(gestorTarefa):
     tarefaNova = Tarefa(nome,prioridade,tipo,data_fim,id_projeto,gestorTarefa)
     gestorTarefa.guardar_ficheiro(tarefaNova)
     return tarefaNova
+
+
+def adicionar_projeto(gestorProjetos):
+    print("="*30)
+    nome = input("Insira o nome do projecto: ")
+
+    novo_projeto = Projeto(nome, gestorProjetos)
+    gestorProjetos.guardar_ficheiro(novo_projeto)
+    return novo_projeto
+
+
+
+def adicionar_membros(gestorMembros):
+    print("="*30)
+    nome = input("Insira o nome do membro: ")
+    email = input("Insira o email: ")
+    if gestorMembros.email_exists(email):
+        print("Email já existe no sistema")
+        return None
+    funcao = input("Insira a função: ")
+
+    novo_membro = Membro(nome,email,funcao)
+    gestorMembros.add_member(novo_membro)
+    return novo_membro
+
+
+
+
+def associar_projeto_membro(gestorProMem, id_projeto):
+    gestorMembros = Gestor_Membros("ficheiros/membros.csv")
+    
+    email = input("Insira o email do membro: ")
+
+    membro = gestorMembros.get_membro_by_email(email)
+
+    if membro is None:
+        print("Membro não encontrado!")
+    else:
+        projeto_membro = Projeto_Membro(id_projeto,membro.email)
+        gestorProMem.guardar_registro(projeto_membro)
 
 def associar_tarefa_membro(gestorTarMem, id_tarefa):
     gestorMembros = Gestor_Membros("ficheiros/membros.csv")

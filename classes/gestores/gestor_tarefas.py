@@ -57,7 +57,7 @@ class Gestor_Tarefas:
         with open(self.ficheiro, "r") as f:
             leitor_csv = csv.reader(f)
             for linha in leitor_csv:
-                if int(linha[0]) == id_tarefa:
+                if linha[0] == id_tarefa:
                     linha[6] = '1'
                     tarefa_encontrada = True
                 tarefas.append(linha)
@@ -72,6 +72,33 @@ class Gestor_Tarefas:
         
         print("Estado da tarefa foi atualizado!")
 
+    def editarTarefa(self, id_tarefa, nome, prioridade, dataFim):
+        tarefas = []
+        tarefa_encontrada = False
+        
+        with open(self.ficheiro, "r") as f:
+            leitor_csv = csv.reader(f)
+            for linha in leitor_csv:
+                if linha[0] == id_tarefa:
+                    if nome is not None:
+                        linha[1] = nome
+                    if prioridade is not None:
+                        linha[2] = prioridade
+                    if dataFim is not None:
+                        linha[5] = dataFim
+                    tarefa_encontrada = True
+                tarefas.append(linha)
+        
+        if not tarefa_encontrada:
+            print(f"Tarefa com ID {id_tarefa} não encontrada.")
+            return
+        
+        with open(self.ficheiro, "w", newline='') as f:
+            escrita_csv = csv.writer(f)
+            escrita_csv.writerows(tarefas)
+        
+        print("Tarefa foi atualizada!")
+
     def get_tarefa_by_id(self, id_tarefa):
         with open(self.ficheiro, "r") as f:
 
@@ -82,3 +109,4 @@ class Gestor_Tarefas:
                 if id == str(id_tarefa):
                     return Tarefa(nome,prioridade,tipo,data_fim,id_proj,None,id,data_inicio,estado)
         return None
+    
