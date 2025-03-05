@@ -1,6 +1,7 @@
 import csv
 
 from classes.tarefa import Tarefa
+from datetime import datetime
 
 class Gestor_Tarefas:
     def __init__(self, ficheiro):
@@ -117,3 +118,6 @@ class Gestor_Tarefas:
                 data_fim_obj = datetime.strtime(data_fim, "%Y-%m-%D")
                 if estado == 0 and data_fim_obj < prazo:
                     tarefas_atraso += 1
+
+    def obter_estatisticas(self):
+        self.contar_tarefas_estado()
