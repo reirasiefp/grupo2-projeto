@@ -22,6 +22,14 @@ class Gestor_Membros:
         print("Membro adicionado com sucesso!")
         return True
     
+    def ver_todos_membros(self):
+        with open(self.ficheiro, "r") as f:
+            linhas = f.readlines()
+        
+        for linhas in linhas:
+            nome, email, funcao = linhas.strip().split(",")
+            print(f"Nome: {nome}, Email: {email}, Função: {funcao}")
+    
     def get_membro_by_email(self, mail):
         with open(self.ficheiro, "r") as f:
 
