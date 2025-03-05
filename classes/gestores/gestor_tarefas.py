@@ -156,14 +156,20 @@ class Gestor_Tarefas:
             for linha in linhas:
                 id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_proj = linha.strip().split(",")
                 total_tarefas += 1
-                if estado == 0:
+                if estado == '0':
                     tarefas_em_progresso +=1
-                elif estado == 1:
+                elif estado == '1':
                     tarefas_concluidas += 1
 
-                data_fim_obj = datetime.strtime(data_fim, "%Y-%m-%D")
-                if estado == 0 and data_fim_obj < prazo:
-                    tarefas_atraso += 1
+                #data_fim_obj = datetime.strftime(datetime(data_fim), "%Y-%m-%D")
+                #if estado == 0 and data_fim_obj < prazo:
+                    #tarefas_atraso += 1
+
+        print(f"Total_tarefas: {total_tarefas}")
+        print(f"Tarefas em progresso: {tarefas_em_progresso}")
+        print(f"Tarefas concluidas: {tarefas_concluidas}")
+        #print(f"Tarefas em atraso: {tarefas_atraso}")
+
 
     def obter_estatisticas(self):
         self.contar_tarefas_estado()

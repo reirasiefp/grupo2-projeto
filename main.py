@@ -230,6 +230,7 @@ def submenuTarefas():
         print("1 - Listar Tarefas")
         print("2 - Adicionar nova Tarefa")
         print("3 - Gestão de Tarefa")
+        print("4 - Estatisticas")
         print("0 - Voltar")
 
         escolha = input("Escolha uma opção: ")
@@ -241,6 +242,8 @@ def submenuTarefas():
             gestaoTarefa(gestorTarefas, nova_tarefa)
         elif escolha == "3":
             gestaoTarefa(gestorTarefas)
+        elif escolha == "4":
+            gestorTarefas.contar_tarefa_estado()
         elif escolha == "0":
             print("Voltando ao Menu Principal...")
             break
