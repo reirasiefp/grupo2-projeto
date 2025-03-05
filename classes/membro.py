@@ -20,4 +20,6 @@ class Membro:
         nome, email, funcao = membro_string.strip().split(",")
         return Membro(nome, email, funcao)
 
+    def __str__(self):
+        return f"Nome: {self.nome}, Email: {self.email}, Função: {self.funcao}"
     

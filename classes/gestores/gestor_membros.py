@@ -1,3 +1,6 @@
+from classes.membro import Membro
+
+
 class Gestor_Membros:
     def __init__(self, ficheiro):
         self.ficheiro = ficheiro
@@ -18,5 +21,16 @@ class Gestor_Membros:
             f.write(membro.to_string() + "\n")
         print("Membro adicionado com sucesso!")
         return True
+    
+    def get_membro_by_email(self, mail):
+        with open(self.ficheiro, "r") as f:
+
+            linhas = f.readlines()
+
+            for linha in linhas:
+                nome, email, funcao = linha.strip().split(",")
+                if email == str(mail):
+                    return Membro(nome, email, funcao)
+        return None
     
 

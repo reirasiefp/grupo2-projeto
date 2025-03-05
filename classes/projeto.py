@@ -1,11 +1,9 @@
 from datetime import date
 
-from classes.gestores.gestor_projetos import Gestor_Projetos
-
 
 class Projeto:
 
-    def __init__(self, nome, gestor, id = None,data_inicio = None, status = None):
+    def __init__(self, nome, gestor="Gestor_Projetos", id = None,data_inicio = None, status = None):
 
         if id is not None:
             self.id = id
@@ -62,3 +60,5 @@ class Projeto:
         id, nome, data_inicio, status = projeto_string.strip().split(",")
         return Projeto(nome, None, id, data_inicio, status)
 
+    def __str__(self):
+        return f"Id: {self.id}, Nome: {self.nome}, Status: {'Em progresso' if self.status == '0' else 'Concluido'}"
