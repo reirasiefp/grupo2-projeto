@@ -1,6 +1,7 @@
 import csv
 
 from classes.tarefa import Tarefa
+from datetime import datetime
 
 class Gestor_Tarefas:
     def __init__(self, ficheiro):
@@ -81,4 +82,42 @@ class Gestor_Tarefas:
                 id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_proj = linha.strip().split(",")
                 if id == str(id_tarefa):
                     return Tarefa(nome,prioridade,tipo,data_fim,id_proj,None,id,data_inicio,estado)
-        return None
+        return None 
+    
+    def calcular_prazo_por_id(self, id_tarefa):
+        tarefa_encontrada = None
+        for tarefa in self.tarefas:
+            if tarefa.id == id_tarefa:
+                tarefa_encontrada = tarefa
+                break
+
+        if tarefa_encontrada:
+            prazo = tarefa_encontrada.data_fim - tarefa_encontrada.data_inicio
+            return prazo.dias
+        else:
+            return "Tarefa não encontrada!"
+        
+    def contar_tarefa_estado(self):
+        total_tarefas = 0
+        tarefas_em_progresso = 0
+        tarefas_concluidas = 0
+        tarefas_atraso = 0
+        prazo = datetime.today()
+
+        with open(self.ficheiro, "r") as f:
+            linhas = f.readlines()
+
+            for linha in linhas:
+                id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_proj = linha.strip().split(",")
+                total_tarefas += 1
+                if estado == 0:
+                    tarefas_em_progresso +=1
+                elif estado == 1:
+                    tarefas_concluidas += 1
+
+                data_fim_obj = datetime.strtime(data_fim, "%Y-%m-%D")
+                if estado == 0 and data_fim_obj < prazo:
+                    tarefas_atraso += 1
+
+    def obter_estatisticas(self):
+        self.contar_tarefas_estado()
