@@ -1,7 +1,6 @@
 import re
 
 from classes.gestores.gestor_membros import Gestor_Membros
-from classes.gestores.gestor_tar_mem import Gestor_Tar_Mem
 from classes.relações.tarefa_membro import Tarefa_Membro
 from classes.tarefa import Tarefa
 
