@@ -1,3 +1,6 @@
+from classes.projeto import Projeto
+
+
 class Gestor_Projetos:
     def __init__(self, ficheiro):
         self.ficheiro = ficheiro
@@ -34,4 +37,16 @@ class Gestor_Projetos:
             else:
                 if estado == '1':
                     print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: Concluido")
-            
+
+
+    def get_projeto_by_id(self, id_projeto):
+        with open(self.ficheiro, "r") as f:
+
+            linhas = f.readlines()
+
+            for linha in linhas:
+                id, nome, data_inicio, estado = linha.strip().split(",")
+                if id == str(id_projeto):
+                    return Projeto(nome, None, id, data_inicio, estado)
+        return None
+    

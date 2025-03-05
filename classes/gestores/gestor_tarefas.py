@@ -1,9 +1,11 @@
 import csv
 
+from classes.tarefa import Tarefa
+
 class Gestor_Tarefas:
     def __init__(self, ficheiro):
         self.ficheiro = ficheiro
-    
+
     def gerar_novo_id(self):
         with open(self.ficheiro, "r") as f:
             linhas = f.readlines()
@@ -72,3 +74,14 @@ class Gestor_Tarefas:
             escrita_csv.writerows(tarefas)
         
         print("Estado da tarefa foi atualizado!")
+
+    def get_tarefa_by_id(self, id_tarefa):
+        with open(self.ficheiro, "r") as f:
+
+            linhas = f.readlines()
+
+            for linha in linhas:
+                id, nome, prioridade, tipo, data_inicio, data_fim, estado, id_proj = linha.strip().split(",")
+                if id == str(id_tarefa):
+                    return Tarefa(nome,prioridade,tipo,data_fim,id_proj,None,id,data_inicio,estado)
+        return None
