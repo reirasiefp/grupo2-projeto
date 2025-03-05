@@ -25,13 +25,13 @@ class Gestor_Tarefas:
             linhas = f.readlines()
         
         for linhas in linhas:
-            id, nome, data_inicio, estado = linhas.strip().split(";")
+            id, nome, prioridade, tipo, data_inicio, data_fim, estado = linhas.strip().split(";")
             if opcao == 0:
-                print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: {'Em progresso' if estado == '0' else 'Concluido'}")
+                print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: {'Em progresso' if estado == '0' else 'Concluido'}")
             elif opcao == 1:
                 if estado == '0':
-                    print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: Em progresso")
+                    print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: Em progresso")
             else:
                 if estado == '1':
-                    print(f"ID: {id}, Nome: {nome}, Data Inicio: {data_inicio}, Status: Concluido")
+                    print(f"ID: {id}, Nome: {nome}, Tipo: {tipo}, Prioridade: {prioridade}, Data Inicio: {data_inicio}, Data Fim: {data_fim}, Status: Concluido")
             
