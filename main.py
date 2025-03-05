@@ -118,6 +118,7 @@ def listagemTarefas(gestorTarefas):
         print("\n============= Listar Tarefas =============")
         print("1 - Listar todas as Tarefas")
         print("2 - Listar Tarefas de um projeto")
+        print("3 - Listar tarefas por prioridade")
         print("0 - Voltar")
 
         escolha = input("Escolha uma opção: ")
@@ -132,6 +133,10 @@ def listagemTarefas(gestorTarefas):
             print(f"Lista de todas as tarefas do projecto: {id_projeto}")
             gestorTarefas.listar_tarefas_projeto(id_projeto)
             print("="*30)
+        elif escolha == "3":
+            prioridade = input("Inisira a prioridade a listar: ")
+            print("="*30)
+            gestorTarefas.prioridade_tarefas(prioridade)
             print("="*30)
         elif escolha == "0":
             print("="*30)
