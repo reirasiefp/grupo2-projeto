@@ -1,4 +1,5 @@
 from classes.gestores.gestor_membros import Gestor_Membros
+from classes.gestores.gestor_tarefas import Gestor_Tarefas
 from classes.relações.tarefa_membro import Tarefa_Membro
 
 class Gestor_Tar_Mem:
@@ -30,12 +31,12 @@ class Gestor_Tar_Mem:
             if id_tarefa == tarefa_id:
                 print(gestorMembros.get_membro_by_email(email))
 
-
-    
-    def procurar_por_id(self, id):
-        # Buscar todos os registros com o mesmo id
-        return [registro for registro in self.registros if registro.id_tarefa == id]
-    
-    def procurar_por_email(self, email):
-        # Buscar todos os registros com o mesmo email
-        return [registro for registro in self.registros if registro.email_membro == email]
+    def ver_todas_tarefas_by_email(self,mail):
+        gestorTarefas = Gestor_Tarefas("ficheiros/tarefas.csv")
+        with open(self.ficheiro, "r") as f:
+            linhas = f.readlines()
+        
+        for linhas in linhas:
+            id_tarefa, email = linhas.strip().split(",")
+            if email == mail:
+                print(gestorTarefas.get_tarefa_by_id(id_tarefa))
